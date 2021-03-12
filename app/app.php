@@ -29,12 +29,21 @@ $app->get('/preview', function ($request, $response) use ($app, $prismic) {
     return $response->withStatus(302)->withHeader('Location', $url);
 });
 
-// Index page
-$app->get('/', function ($request, $response) use ($app, $prismic) {
-    render($app, 'home');
-});
+// // Index page
+// $app->get('/', function ($request, $response) use ($app, $prismic) {
+//     render($app, 'home');
+// });
 
 // 404 Page (Keep at the bottom of the routes)
 $app->get('/{id}', function ($request, $response) use ($app, $prismic) {
     render($app, '404');
+});
+
+$app->get('/', function ($request, $response, $args) use ($app, $prismic) {
+    // Query the API
+    $api = $prismic->get_api();
+    $document = $api->getByUID('page', 'first-page');
+ 
+    // Render the page
+    render($app, 'home', array('document' => $document));
 });

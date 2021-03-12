@@ -1,5 +1,5 @@
 {
-  "name": "PHP Quickstart",
+  "name": "benjamin/php_quickstart",
   "version": "2.0",
   "require": {
     "php": ">=7.1",
